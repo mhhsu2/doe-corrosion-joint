@@ -22,7 +22,7 @@ app.config["SECRET_KEY"] = "doe-corrosion-joint"
 @app.route("/", methods=["GET"])
 def index():
 
-    return render_template("exp_info.html")
+    return render_template("index.html")
 
 
 if __name__ == "__main__":
