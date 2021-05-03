@@ -28,9 +28,9 @@ def index():
 @app.route("/search/<team>", methods=["GET", "POST"])
 def search(team):
     db = Database()
-    data = db.get_table(table="sprjoint")
+    data, col_name_trans = db.get_sprjoint_table()
 
-    return render_template("search.html", data=data, team=team)
+    return render_template("search.html", data=data, col_name_trans=col_name_trans, team=team)
 
 
 if __name__ == "__main__":

@@ -31,6 +31,51 @@ class Database:
         result = self.cur.fetchall()
         return result
 
+    def get_sprjoint_table(self):
+        query = f"""
+        SELECT *
+        FROM sprjoint
+        LIMIT 1000
+        """
+
+        self.cur.execute(query)
+        result = self.cur.fetchall()
+
+        db_col_names = result[1].keys()
+        display_col_names = [
+            "Id",
+            "Joint Type",
+            "Velocity (mm/s)",
+            "Al Thickness (mm)",
+            "Steel Thickness (mm)",
+            "Rivet Diameter (mm)",
+            "Rivet Length (mm)",
+            "Corrosion Hours (h)",
+            "Al 1 Material Loss Ratio",
+            "Al 2 Material Loss Ratio",
+            "Zone I Material Loss Ratio",
+            "Zone II Material Loss Ratio",
+            "Zone III Material Loss Ratio",
+            "Zone IV Material Loss Ratio",
+            "Zone V Material Loss Ratio",
+            "Steel 1 Material Loss Ratio",
+            "Zone 1 Width (mm)",
+            "Min Stiffness (kN/mm)",
+            "Max Stiffness (kN/mm)",
+            "Avg Stiffness (kN/mm)",
+            "Min Failure Load (kN)",
+            "Max Failure Load (kN)",
+            "Avg Failure Load (kN)",
+            "Min Absorbed Energy (J)",
+            "Max Absorbed Energy (J)",
+            "Avg Absorbed Energy (J)",
+        ]
+        if len(db_col_names) == len(display_col_names):
+            col_names_trans = dict(zip(db_col_names, display_col_names))
+        else:
+            print("Errors. Check columns from database and specificed columns.")
+        return result, col_names_trans
+
 
 if __name__ == "__main__":
     # Test db connection

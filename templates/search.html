@@ -26,11 +26,11 @@
         <h3>Data</h3>
 
     </div>
-    <table id="data" class="table text-center table-sm table-hover table-striped table-bordered">
+    <table id="data" class="table text-center table-responsive-xl table-hover table-striped table-bordered">
         <thead>
             <tr>
                 {% for key in data[0].keys() %}
-                    <th>{{ key }}</th>
+                    <th>{{ col_name_trans[key] }}</th>
                 {% endfor %}
             </tr>
         </thead>
@@ -40,7 +40,7 @@
             <tr>
                 {% for key in row.keys() %}
                     <td>{{ row[key] }}</td>
-                {% endfor %}
+                {% endfor %}               
             </tr>
             
             {% endfor %} 
