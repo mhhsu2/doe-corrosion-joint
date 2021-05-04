@@ -1,4 +1,5 @@
 import os
+from pdb import Pdb
 
 import pymysql
 import yaml
@@ -31,7 +32,7 @@ class Database:
         result = self.cur.fetchall()
         return result
 
-    def get_sprjoint_table(self):
+    def sprjoint_table_view(self):
         query = f"""
         SELECT *
         FROM sprjoint
@@ -75,6 +76,18 @@ class Database:
         else:
             print("Errors. Check columns from database and specificed columns.")
         return result, col_names_trans
+
+    def table_insert(self, table, row):
+        keys = ", ".join(f"{k}" for k, v in row.items() if v is not "")
+        values = ", ".join(f"'{v}'" for v in row.values() if v is not "")
+
+        query = f"""
+        INSERT INTO {table} ({keys})
+        VALUES ({values})
+        """
+
+        self.cur.execute(query)
+        self.con.commit()
 
 
 if __name__ == "__main__":

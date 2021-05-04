@@ -25,12 +25,19 @@ def index():
     return render_template("index.html")
 
 
-@app.route("/search/<team>", methods=["GET", "POST"])
-def search(team):
+@app.route("/data/<team>", methods=["GET", "POST"])
+def data(team):
     db = Database()
-    data, col_name_trans = db.get_sprjoint_table()
+    data, col_name_trans = db.sprjoint_table_view()
 
-    return render_template("search.html", data=data, col_name_trans=col_name_trans, team=team)
+    if request.method == "POST":
+        formdata = request.form.to_dict()
+        del formdata["button"]
+        db.table_insert(table="sprjoint", row=formdata)
+
+        return redirect(url_for("data", team=team))
+
+    return render_template("data.html", data=data, col_name_trans=col_name_trans, team=team)
 
 
 if __name__ == "__main__":
