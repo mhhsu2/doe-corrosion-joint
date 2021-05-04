@@ -1,5 +1,4 @@
 import os
-from pdb import Pdb
 
 import pymysql
 import yaml
@@ -84,6 +83,16 @@ class Database:
         query = f"""
         INSERT INTO {table} ({keys})
         VALUES ({values})
+        """
+
+        self.cur.execute(query)
+        self.con.commit()
+
+    def table_delete(self, table, row):
+        id = [*row.values()][0]
+        query = f"""
+        DELETE FROM {table}
+        WHERE id_{table} = {id}
         """
 
         self.cur.execute(query)

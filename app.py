@@ -32,8 +32,14 @@ def data(team):
 
     if request.method == "POST":
         formdata = request.form.to_dict()
-        del formdata["button"]
-        db.table_insert(table="sprjoint", row=formdata)
+
+        if formdata["button"] == "insert":
+            del formdata["button"]
+            db.table_insert(table="sprjoint", row=formdata)
+
+        elif formdata["button"] == "delete":
+            del formdata["button"]
+            db.table_delete(table="sprjoint", row=formdata)
 
         return redirect(url_for("data", team=team))
 
