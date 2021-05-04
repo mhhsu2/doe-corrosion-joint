@@ -41,6 +41,10 @@ def data(team):
             del formdata["button"]
             db.table_delete(table="sprjoint", row=formdata)
 
+        elif formdata["button"] == "update":
+            del formdata["button"]
+            db.table_update(table="sprjoint", row=formdata)
+
         return redirect(url_for("data", team=team))
 
     return render_template("data.html", data=data, col_name_trans=col_name_trans, team=team)

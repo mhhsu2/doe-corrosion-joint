@@ -90,8 +90,22 @@ class Database:
 
     def table_delete(self, table, row):
         id = [*row.values()][0]
+
         query = f"""
         DELETE FROM {table}
+        WHERE id_{table} = {id}
+        """
+
+        self.cur.execute(query)
+        self.con.commit()
+
+    def table_update(self, table, row):
+        id = [*row.values()][0]
+        pairs = ", ".join(f"{k} = '{v}'" for k, v in row.items() if v is not "")
+
+        query = f"""
+        UPDATE {table}
+        SET {pairs}
         WHERE id_{table} = {id}
         """
 
