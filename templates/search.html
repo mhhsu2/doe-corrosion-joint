@@ -9,17 +9,10 @@
 {% endblock section_title %}
 
 {% block description %}
-    <p>Test</p>
+    
 {% endblock description %}
 
 {% block content %}
-
-
-
-    {% block form %}
-    
-    {% endblock form %}
-
 
     <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-1 mb-1">
 
@@ -46,6 +39,30 @@
             {% endfor %} 
         </tbody>   
     </table>
+
+    {% block form %}
+        <h3>Insert, Update, Delete</h3>
+        <form method='post' action="" class="form-group">
+
+            <div class="form-row form-group align-items-center ">
+
+                {% for col in col_name_trans.values() %}
+                    <div class="col-md-3">
+                        <label for="{{ col }}">{{ col }}</label>
+                        <input type="text" class="form-control" name="{{ col }}", id="{{ col }}">    
+                    </div>
+                {% endfor %}
+
+                <div class="col-md-12 mt-2">
+                    <button type="submit" name = "button" value = "insert" class="btn btn-secondary">Insert</button>
+                    <button type="submit" name = "button" value = "delete" class="btn btn-secondary">Delete</button>
+                    <button type="submit" name = "button" value = "update" class="btn btn-secondary">Update</button>
+                </div>
+
+            </div>
+        </form>
+
+    {% endblock form %}
 
 
 {% endblock content %}
