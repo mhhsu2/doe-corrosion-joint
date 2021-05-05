@@ -49,6 +49,7 @@ def data(team):
         sort_action="native",
         filter_action="native",
         page_action="native",
+        page_size=25,
         export_format="xlsx",
         export_headers="display",
     )
@@ -92,10 +93,12 @@ dashapp.layout = dash_table.DataTable(
         "width": "240px",
         "maxWidth": "240px",
     },
+    style_table={"overflowX": "auto"},
     editable=True,
     sort_action="native",
     filter_action="native",
     page_action="native",
+    page_size=25,
     export_format="xlsx",
     export_headers="display",
 )
