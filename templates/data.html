@@ -9,36 +9,15 @@
 {% endblock section_title %}
 
 {% block description %}
-    
+
 {% endblock description %}
 
 {% block content %}
 
-    <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-1 mb-1">
-
-        <h3>Data</h3>
-
+    <div class="embed-responsive embed-responsive-16by9">
+        <iframe src="../dashapp"></iframe>
     </div>
-    <table id="data" class="table text-center table-responsive-xl table-hover table-striped table-bordered">
-        <thead>
-            <tr>
-                {% for key in data[0].keys() %}
-                    <th>{{ col_name_trans[key] }}</th>
-                {% endfor %}
-            </tr>
-        </thead>
-
-        <tbody>
-            {% for row in data %}
-            <tr>
-                {% for key in row.keys() %}
-                    <td>{{ row[key] }}</td>
-                {% endfor %}               
-            </tr>
-            
-            {% endfor %} 
-        </tbody>   
-    </table>
+    
 
     {% block form %}
         <h3>Insert, Update, Delete</h3>
@@ -71,9 +50,6 @@
 
     {% endblock form %}
 
-    <div class="embed-responsive embed-responsive-16by9">
-        <iframe src="http://localhost:8050">
-    </div>
       
 
 {% endblock content %}
