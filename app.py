@@ -34,10 +34,10 @@ def index():
     return render_template("index.html")
 
 
-@app.route("/data/<team>", methods=["GET", "POST"])
-def data(team):
+@app.route("/search/<team>", methods=["GET", "POST"])
+def search(team):
     db = Database()
-    data, col_name_trans = db.sprjoint_table_view()
+    data, col_name_trans = db.umich_table_view()
     dashapp.layout = create_datatable(data, col_name_trans)
 
     if request.method == "POST":
@@ -45,19 +45,19 @@ def data(team):
 
         if formdata["button"] == "insert":
             del formdata["button"]
-            db.table_insert(table="sprjoint", row=formdata)
+            db.table_insert(table="umich", row=formdata)
 
         elif formdata["button"] == "delete":
             del formdata["button"]
-            db.table_delete(table="sprjoint", row=formdata)
+            db.table_delete(table="umich", row=formdata)
 
         elif formdata["button"] == "update":
             del formdata["button"]
-            db.table_update(table="sprjoint", row=formdata)
+            db.table_update(table="umich", row=formdata)
 
-        return redirect(url_for("data", team=team))
+        return redirect(url_for("search", team=team))
 
-    return render_template("data.html", data=data, col_name_trans=col_name_trans, team=team)
+    return render_template("search.html", col_name_trans=col_name_trans, team=team)
 
 
 @app.route("/dashapp")

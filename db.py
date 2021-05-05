@@ -31,10 +31,10 @@ class Database:
         result = self.cur.fetchall()
         return result
 
-    def sprjoint_table_view(self):
+    def umich_table_view(self):
         query = f"""
         SELECT *
-        FROM sprjoint
+        FROM umich
         LIMIT 1000
         """
 
@@ -119,7 +119,7 @@ if __name__ == "__main__":
     print(f"Connected: {db.con.open}")
 
     # Test table
-    result = db.get_table(table="sprjoint")
+    result = db.get_table(table="umich")
     print(result)
     import pdb
 
