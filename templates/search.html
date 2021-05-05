@@ -30,10 +30,10 @@
                         <label for="{{ db_col_name }}">{{ display_col_name }}</label>
                         
                         {% if display_col_name == "Id" %}
-                            <input type="text" class="form-control" name="{{ db_col_name }}", id="{{ db_col_name }}", placeholder="Enter if UPDATE or DELETE">
+                            <input type="text" class="form-control" name="{{ db_col_name }}" id="{{ db_col_name }}" placeholder="Required" required>
 
                         {% else %}
-                            <input type="text" class="form-control" name="{{ db_col_name }}", id="{{ db_col_name }}" onkeyup="this.value = this.value.toUpperCase();">    
+                            <input type="text" class="form-control" name="{{ db_col_name }}" id="{{ db_col_name }}" onkeyup="this.value = this.value.toUpperCase();">    
                         {% endif %}
 
                     </div>
