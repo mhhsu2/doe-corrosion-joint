@@ -36,9 +36,17 @@ def create_datatable(data: dict, col_name_trans: dict = None) -> dash_table.Data
 
 if __name__ == "__main__":
     db = Database()
-    data, col_name_trans = db.umich_table_view()
+    data, col_name_trans = db.psu_product_rsw_table_view()
 
-    app = dash.Dash(__name__, assets_folder="static/dashassets")
+    app = dash.Dash(
+        __name__,
+        assets_folder="static/dashassets",
+        external_scripts=[
+            "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=TeX-MML-AM_CHTML",
+        ],
+    )
+
+    ## Test datatable
     app.layout = create_datatable(data, col_name_trans)
 
     app.run_server(debug=True)

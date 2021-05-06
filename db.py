@@ -31,11 +31,46 @@ class Database:
         result = self.cur.fetchall()
         return result
 
+    def table_insert(self, table, row):
+        keys = ", ".join(f"{k}" for k, v in row.items() if v is not "")
+        values = ", ".join(f"'{v}'" for v in row.values() if v is not "")
+
+        query = f"""
+        INSERT INTO {table} ({keys})
+        VALUES ({values})
+        """
+
+        self.cur.execute(query)
+        self.con.commit()
+
+    def table_delete(self, table, row):
+        id = [*row.values()][0]
+
+        query = f"""
+        DELETE FROM {table}
+        WHERE id_{table} = {id}
+        """
+
+        self.cur.execute(query)
+        self.con.commit()
+
+    def table_update(self, table, row):
+        id = [*row.values()][0]
+        pairs = ", ".join(f"{k} = '{v}'" for k, v in row.items() if v is not "")
+
+        query = f"""
+        UPDATE {table}
+        SET {pairs}
+        WHERE id_{table} = {id}
+        """
+
+        self.cur.execute(query)
+        self.con.commit()
+
     def umich_table_view(self):
         query = f"""
         SELECT *
         FROM umich
-        LIMIT 1000
         """
 
         self.cur.execute(query)
@@ -76,41 +111,29 @@ class Database:
             print("Errors. Check columns from database and specificed columns.")
         return result, col_names_trans
 
-    def table_insert(self, table, row):
-        keys = ", ".join(f"{k}" for k, v in row.items() if v is not "")
-        values = ", ".join(f"'{v}'" for v in row.values() if v is not "")
-
+    def psu_product_rsw_table_view(self):
         query = f"""
-        INSERT INTO {table} ({keys})
-        VALUES ({values})
+        SELECT *
+        FROM psu_corrosion_product_rsw
         """
 
         self.cur.execute(query)
-        self.con.commit()
+        result = self.cur.fetchall()
 
-    def table_delete(self, table, row):
-        id = [*row.values()][0]
-
-        query = f"""
-        DELETE FROM {table}
-        WHERE id_{table} = {id}
-        """
-
-        self.cur.execute(query)
-        self.con.commit()
-
-    def table_update(self, table, row):
-        id = [*row.values()][0]
-        pairs = ", ".join(f"{k} = '{v}'" for k, v in row.items() if v is not "")
-
-        query = f"""
-        UPDATE {table}
-        SET {pairs}
-        WHERE id_{table} = {id}
-        """
-
-        self.cur.execute(query)
-        self.con.commit()
+        db_col_names = result[1].keys()
+        display_col_names = [q
+            "Id",
+            "Cycles",
+            "Al Coupled",
+            "Al Uncoupled",
+            "Fe Coupled",
+            "Fe Coupled",
+        ]
+        if len(db_col_names) == len(display_col_names):
+            col_names_trans = dict(zip(db_col_names, display_col_names))
+        else:
+            print("Errors. Check columns from database and specificed columns.")
+        return result, col_names_trans
 
 
 if __name__ == "__main__":
