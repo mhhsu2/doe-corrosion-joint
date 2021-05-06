@@ -34,6 +34,11 @@ dashapp = dash.Dash(
 dashapp.layout = create_datatable(data=[{"init": "test"}])
 
 
+@app.route("/dashapp")
+def dash_app():
+    return dashapp.index()
+
+
 @app.route("/", methods=["GET"])
 def index():
 
@@ -69,9 +74,9 @@ def search(table):
     return render_template("search.html", col_name_trans=col_name_trans, table=table)
 
 
-@app.route("/dashapp")
-def dash_app():
-    return dashapp.index()
+@app.route("/phase")
+def phase():
+    return render_template("phase.html")
 
 
 if __name__ == "__main__":

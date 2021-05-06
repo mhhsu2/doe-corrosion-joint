@@ -1,0 +1,66 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    DOE Corrosion Joint - Phase
+{% endblock title %}
+
+{% block section_title %}
+    Phase-PSU
+{% endblock section_title %}
+
+{% block description %}
+
+{% endblock description %}
+
+{% block content %}
+    <div class="container-fluid">
+
+        <div class="row pt-2 pb-2">
+            <div class="col-md-12 text-center">
+                <h3>Microstructure Characterization of Fe-Al interface</h3>
+                <img src="{{ url_for('static', filename='figs/micro_interface.png') }}" alt=""  class="img-fluid" style="Max-width: 60%">
+            </div>
+        </div>
+
+        <div class="row pt-3 pb-3">
+            <div class="col-md-12 text-center">
+                <h3>EDS</h3>
+                <img src="{{ url_for('static', filename='figs/eds.png') }}" alt=""  class="img-fluid" style="Max-width: 60%">
+            </div>
+        </div>
+
+        <div class="row pt-3 pb-3">
+            <div class="col-md-12 text-center">
+                <h3 class="text-left">Equilibrium Simulation for x(Al) = 0.84, x(Fe) = 0.16</h3>
+                <img src="{{ url_for('static', filename='figs/eq_sim_phase_diagram.png') }}" alt=""  class="img-fluid" style="Max-width: 90%">
+            </div>
+
+            <div class="col-md-6 text-center pt-3">
+                <h4>Experiment</h4>
+                <img src="{{ url_for('static', filename='figs/eq_sim_exp.png') }}" alt=""  class="img-fluid" style="Max-width: 80%">
+            </div>
+            <div class="col-md-6 text-center pt-3">
+                <h4>Simulation</h4>
+                <img src="{{ url_for('static', filename='figs/eq_sim_phase_fraction.png') }}" alt=""  class="img-fluid" style="Max-width: 80%">
+            </div>
+        </div>
+
+        <div class="row pt-3 pb-3">
+            <div class="col-md-12 text-center">
+                <h3 class="text-left">Scheil simulation for x(Fe)=0.16 </h3>
+                <img src="{{ url_for('static', filename='figs/sh_sim_phase_diagram.png') }}" alt=""  class="img-fluid" style="Max-width: 90%">
+            </div>
+
+            <div class="col-md-6 text-center pt-3">
+                <h4>Experiment</h4>
+                <img src="{{ url_for('static', filename='figs/sh_sim_exp.png') }}" alt=""  class="img-fluid" style="Max-width: 80%">
+            </div>
+            <div class="col-md-6 text-center pt-3">
+                <h4>Simulation</h4>
+                <img src="{{ url_for('static', filename='figs/sh_sim_phase_fraction.png') }}" alt=""  class="img-fluid" style="Max-width: 80%">
+            </div>
+        </div>
+
+    </div>
+    
+{% endblock content %}
