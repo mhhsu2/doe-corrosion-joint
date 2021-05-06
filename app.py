@@ -22,7 +22,13 @@ app.config["SECRET_KEY"] = "doe-corrosion-joint"
 
 # Dashapp
 dashapp = dash.Dash(
-    __name__, server=app, url_base_pathname="/dashapp/", assets_folder="static/dashassets"
+    __name__,
+    server=app,
+    url_base_pathname="/dashapp/",
+    assets_folder="static/dashassets",
+    external_scripts=[
+        "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=TeX-MML-AM_CHTML",
+    ],
 )
 
 dashapp.layout = create_datatable(data=[{"init": "test"}])
@@ -37,7 +43,14 @@ def index():
 @app.route("/search/<table>", methods=["GET", "POST"])
 def search(table):
     db = Database()
-    data, col_name_trans = db.umich_table_view()
+
+    # Table
+    if table == "umich":
+        data, col_name_trans = db.umich_table_view()
+
+    elif table == "psu_corrosion_product_rsw":
+        data, col_name_trans = db.psu_product_rsw_table_view()
+
     dashapp.layout = create_datatable(data, col_name_trans)
 
     if request.method == "POST":
@@ -45,15 +58,15 @@ def search(table):
 
         if formdata["button"] == "insert":
             del formdata["button"]
-            db.table_insert(table="umich", row=formdata)
+            db.table_insert(table=table, row=formdata)
 
         elif formdata["button"] == "delete":
             del formdata["button"]
-            db.table_delete(table="umich", row=formdata)
+            db.table_delete(table=table, row=formdata)
 
         elif formdata["button"] == "update":
             del formdata["button"]
-            db.table_update(table="umich", row=formdata)
+            db.table_update(table=table, row=formdata)
 
         return redirect(url_for("search", table=table))
 

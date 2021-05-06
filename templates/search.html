@@ -5,7 +5,11 @@
 {% endblock title %}
 
 {% block section_title %}
-    SPR-Umich
+    {% if table == "umich" %}
+        SPR-Umich
+    {% elif table == "psu_corrosion_product_rsw" %}
+        Corrosion Product RSW-PSU
+    {% endif %}
 {% endblock section_title %}
 
 {% block description %}
@@ -33,11 +37,16 @@
                             <input type="text" class="form-control" name="{{ db_col_name }}" id="{{ db_col_name }}" placeholder="Required" required autocomplete="off">
 
                         {% else %}
-                            <input type="text" class="form-control" name="{{ db_col_name }}" id="{{ db_col_name }}" onkeyup="this.value = this.value.toUpperCase();" autocomplete="off">    
+                            <input type="text" class="form-control" name="{{ db_col_name }}" id="{{ db_col_name }}" autocomplete="off">    
                         {% endif %}
 
                     </div>
                 {% endfor %}
+                
+                {% if table == "psu_corrosion_product_rsw" %}
+                    LaTex input format example: $$ Al_{3}(OH)_3 $$
+                {% endif %}
+        
 
                 <div class="col-md-12 mt-2">
                     <button type="submit" name = "button" value = "insert" class="btn btn-secondary">Insert</button>

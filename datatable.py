@@ -24,7 +24,6 @@ def create_datatable(data: dict, col_name_trans: dict = None) -> dash_table.Data
             "width": "240px",
             "maxWidth": "240px",
         },
-        editable=True,
         sort_action="native",
         filter_action="native",
         page_action="native",
