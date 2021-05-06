@@ -34,8 +34,8 @@ def index():
     return render_template("index.html")
 
 
-@app.route("/search/<team>", methods=["GET", "POST"])
-def search(team):
+@app.route("/search/<table>", methods=["GET", "POST"])
+def search(table):
     db = Database()
     data, col_name_trans = db.umich_table_view()
     dashapp.layout = create_datatable(data, col_name_trans)
@@ -55,9 +55,9 @@ def search(team):
             del formdata["button"]
             db.table_update(table="umich", row=formdata)
 
-        return redirect(url_for("search", team=team))
+        return redirect(url_for("search", table=table))
 
-    return render_template("search.html", col_name_trans=col_name_trans, team=team)
+    return render_template("search.html", col_name_trans=col_name_trans, table=table)
 
 
 @app.route("/dashapp")

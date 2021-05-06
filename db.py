@@ -121,7 +121,7 @@ class Database:
         result = self.cur.fetchall()
 
         db_col_names = result[1].keys()
-        display_col_names = [q
+        display_col_names = [
             "Id",
             "Cycles",
             "Al Coupled",
