@@ -50,8 +50,7 @@
           </a>
           <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
             <a class="dropdown-item" href="{{ url_for('search', table='umich') }}">SPR-UMich</a>
-          </div>
-          <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+            <a class="dropdown-item" href="{{ url_for('search', table='psu_corrosion_product_spr') }}">Corrosion Product SPR-PSU</a>
             <a class="dropdown-item" href="{{ url_for('search', table='psu_corrosion_product_rsw') }}">Corrosion Product RSW-PSU</a>
           </div>
         </li>
@@ -85,6 +84,13 @@
               <a class="nav-link" href="{{ url_for('search', table='umich') }}">
                   <span data-feather="search"> </span>
                  SPR-UMich
+              </a>
+            </li>
+
+            <li class="nav-item">
+              <a class="nav-link" href="{{ url_for('search', table='psu_corrosion_product_spr') }}">
+                  <span data-feather="search"> </span>
+                 Corrosion Product SPR-PSU
               </a>
             </li>
 

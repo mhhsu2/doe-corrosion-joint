@@ -9,6 +9,8 @@
         SPR-Umich
     {% elif table == "psu_corrosion_product_rsw" %}
         Corrosion Product RSW-PSU
+    {% elif table == "psu_corrosion_product_spr" %}
+        Corrosion Product SPR-PSU
     {% endif %}
 {% endblock section_title %}
 
@@ -43,7 +45,7 @@
                     </div>
                 {% endfor %}
                 
-                {% if table == "psu_corrosion_product_rsw" %}
+                {% if "psu_corrosion_product_rsw" in table %}
                     LaTex input format example: $$ Al_{3}(OH)_3 $$
                 {% endif %}
         
