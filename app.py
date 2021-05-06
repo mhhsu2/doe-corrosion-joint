@@ -45,11 +45,7 @@ def search(table):
     db = Database()
 
     # Table
-    if table == "umich":
-        data, col_name_trans = db.umich_table_view()
-
-    elif table == "psu_corrosion_product_rsw":
-        data, col_name_trans = db.psu_product_rsw_table_view()
+    data, col_name_trans = db.table_view(table=table)
 
     dashapp.layout = create_datatable(data, col_name_trans)
 

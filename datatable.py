@@ -26,8 +26,8 @@ def create_datatable(data: dict, col_name_trans: dict = None) -> dash_table.Data
         },
         sort_action="native",
         filter_action="native",
-        page_action="native",
-        page_size=25,
+        # page_action="native",
+        # page_size=25,
         export_format="xlsx",
         export_headers="display",
     )
@@ -35,7 +35,7 @@ def create_datatable(data: dict, col_name_trans: dict = None) -> dash_table.Data
 
 if __name__ == "__main__":
     db = Database()
-    data, col_name_trans = db.psu_product_rsw_table_view()
+    data, col_name_trans = db.table_view(table="psu_corrosion_product_spr")
 
     app = dash.Dash(
         __name__,

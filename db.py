@@ -20,6 +20,44 @@ class Database:
         )
         self.cur = self.con.cursor()
 
+        self.umich_display_col_names = [
+            "Id",
+            "Joint Type",
+            "Velocity (mm/s)",
+            "Al Thickness (mm)",
+            "Steel Thickness (mm)",
+            "Rivet Diameter (mm)",
+            "Rivet Length (mm)",
+            "Corrosion Hours (h)",
+            "Al 1 Material Loss Ratio",
+            "Al 2 Material Loss Ratio",
+            "Zone I Material Loss Ratio",
+            "Zone II Material Loss Ratio",
+            "Zone III Material Loss Ratio",
+            "Zone IV Material Loss Ratio",
+            "Zone V Material Loss Ratio",
+            "Steel 1 Material Loss Ratio",
+            "Zone 1 Width (mm)",
+            "Min Stiffness (kN/mm)",
+            "Max Stiffness (kN/mm)",
+            "Avg Stiffness (kN/mm)",
+            "Min Failure Load (kN)",
+            "Max Failure Load (kN)",
+            "Avg Failure Load (kN)",
+            "Min Absorbed Energy (J)",
+            "Max Absorbed Energy (J)",
+            "Avg Absorbed Energy (J)",
+        ]
+
+        self.psu_display_corrosion_product_col_names = [
+            "Id",
+            "Cycles",
+            "Al Coupled",
+            "Al Uncoupled",
+            "Fe Coupled",
+            "Fe Coupled",
+        ]
+
     def get_table(self, table: str):
         query = f"""
         SELECT *
@@ -67,68 +105,21 @@ class Database:
         self.cur.execute(query)
         self.con.commit()
 
-    def umich_table_view(self):
+    def table_view(self, table: str):
         query = f"""
         SELECT *
-        FROM umich
+        FROM {table}
         """
 
         self.cur.execute(query)
         result = self.cur.fetchall()
 
-        db_col_names = result[1].keys()
-        display_col_names = [
-            "Id",
-            "Joint Type",
-            "Velocity (mm/s)",
-            "Al Thickness (mm)",
-            "Steel Thickness (mm)",
-            "Rivet Diameter (mm)",
-            "Rivet Length (mm)",
-            "Corrosion Hours (h)",
-            "Al 1 Material Loss Ratio",
-            "Al 2 Material Loss Ratio",
-            "Zone I Material Loss Ratio",
-            "Zone II Material Loss Ratio",
-            "Zone III Material Loss Ratio",
-            "Zone IV Material Loss Ratio",
-            "Zone V Material Loss Ratio",
-            "Steel 1 Material Loss Ratio",
-            "Zone 1 Width (mm)",
-            "Min Stiffness (kN/mm)",
-            "Max Stiffness (kN/mm)",
-            "Avg Stiffness (kN/mm)",
-            "Min Failure Load (kN)",
-            "Max Failure Load (kN)",
-            "Avg Failure Load (kN)",
-            "Min Absorbed Energy (J)",
-            "Max Absorbed Energy (J)",
-            "Avg Absorbed Energy (J)",
-        ]
-        if len(db_col_names) == len(display_col_names):
-            col_names_trans = dict(zip(db_col_names, display_col_names))
-        else:
-            print("Errors. Check columns from database and specificed columns.")
-        return result, col_names_trans
-
-    def psu_product_rsw_table_view(self):
-        query = f"""
-        SELECT *
-        FROM psu_corrosion_product_rsw
-        """
-
-        self.cur.execute(query)
-        result = self.cur.fetchall()
+        if table == "umich":
+            display_col_names = self.umich_display_col_names
+        elif "psu_corrosion_product" in table:
+            display_col_names = self.psu_display_corrosion_product_col_names
 
         db_col_names = result[1].keys()
-        display_col_names = [
-            "Id",
-            "Cycles",
-            "Al Coupled",
-            "Al Uncoupled",
-            "Fe Coupled",
-            "Fe Coupled",
-        ]
         if len(db_col_names) == len(display_col_names):
             col_names_trans = dict(zip(db_col_names, display_col_names))
         else:
@@ -142,8 +133,5 @@ if __name__ == "__main__":
     print(f"Connected: {db.con.open}")
 
     # Test table
-    result = db.get_table(table="umich")
+    result = db.table_view(table="psu_corrosion_product_rsw")
     print(result)
-    import pdb
-
-    pdb.set_trace()
