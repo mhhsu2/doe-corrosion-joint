@@ -20,9 +20,9 @@ def create_datatable(data: dict, col_name_trans: dict = None) -> dash_table.Data
         style_header={"backgroundColor": "rgb(230, 230, 230)", "fontWeight": "bold"},
         style_cell={
             # all three widths are needed
-            "minWidth": "240px",
+            "minWidth": "10px",
             "width": "240px",
-            "maxWidth": "240px",
+            "maxWidth": "500px",
         },
         sort_action="native",
         filter_action="native",
@@ -35,7 +35,7 @@ def create_datatable(data: dict, col_name_trans: dict = None) -> dash_table.Data
 
 if __name__ == "__main__":
     db = Database()
-    data, col_name_trans = db.table_view(table="psu_corrosion_product_spr")
+    data, col_name_trans = db.table_view(table="psu_elastic_properties")
 
     app = dash.Dash(
         __name__,

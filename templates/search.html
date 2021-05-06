@@ -11,18 +11,30 @@
         Corrosion Product RSW-PSU
     {% elif table == "psu_corrosion_product_spr" %}
         Corrosion Product SPR-PSU
+    {% elif table == "psu_elastic_properties" %}
+        Predicted Elastic Properties of Al-Fe IMCs
     {% endif %}
 {% endblock section_title %}
 
 {% block description %}
+{% if table == "psu_elastic_properties" %}
+    Predicted elastic properties (GPa or dimensionless) of Al-Fe IMCs, including the single crystal elastic constants \(C_{ij}\) and calculated aggregate properties in Hill approach (H) of bulk modulus (\(B_H\)), shear modulus (\(G_H\)), \(B_H/G_H\) ratio, Poisson’s ratio (\(\\nu_H\)), and anisotropy index \(A^U\) (\(A^U = 0\) for locally isotropic single crystal. It shows that \(Al_8Fe_5\) is a compound which is very close to isotropic crystal, while \(AlFe_3\  (L1_2)\) shows extremely anisotropic.
+{% endif %}
 
 {% endblock description %}
 
 {% block content %}
 
-    <div class="embed-responsive embed-responsive-16by9">
-        <iframe src="../dashapp"></iframe>
+    <div class="row">
+        <div class="embed-responsive embed-responsive-16by9 pt-3 bt-3">
+            <iframe src="../dashapp"></iframe>
+        </div>
+        <div>
+            a: Measured elastic constants for Al at 0 K (C11 =114.3, C12 = 61.9 GPa, and C44 = 31.6 GPa) and Fe at 4.2 K (C11 =243.1, C12 = 138.1 GPa, and C44 = 121.9 GPa). 
+            b: Predicted value by EOS fitting.
+        </div>
     </div>
+    
     
 
     {% block form %}
@@ -45,7 +57,7 @@
                     </div>
                 {% endfor %}
                 
-                {% if "psu_corrosion_product_rsw" in table %}
+                {% if "psu" in table %}
                     LaTex input format example: $$ Al_{3}(OH)_3 $$
                 {% endif %}
         

@@ -49,13 +49,24 @@ class Database:
             "Avg Absorbed Energy (J)",
         ]
 
-        self.psu_display_corrosion_product_col_names = [
+        self.psu_corrosion_product_display_col_names = [
             "Id",
             "Cycles",
             "Al Coupled",
             "Al Uncoupled",
             "Fe Coupled",
             "Fe Coupled",
+        ]
+
+        self.psu_elastic_properties_display_col_names = [
+            "Id",
+            "Material",
+            "$$C_{ij}\  Matrix$$",
+            "$$B_H$$",
+            "$$G_H$$",
+            "$$\\frac{B_H}{G_H}$$",
+            "$$\\nu_H$$",
+            "$$A^U$$",
         ]
 
     def get_table(self, table: str):
@@ -117,7 +128,9 @@ class Database:
         if table == "umich":
             display_col_names = self.umich_display_col_names
         elif "psu_corrosion_product" in table:
-            display_col_names = self.psu_display_corrosion_product_col_names
+            display_col_names = self.psu_corrosion_product_display_col_names
+        elif "psu_elastic_properties" == table:
+            display_col_names = self.psu_elastic_properties_display_col_names
 
         db_col_names = result[1].keys()
         if len(db_col_names) == len(display_col_names):

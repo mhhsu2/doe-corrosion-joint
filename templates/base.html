@@ -28,6 +28,9 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/feather-icons/4.9.0/feather.min.js"></script>
     <script src="https://unpkg.com/feather-icons/dist/feather.min.js"></script>
 
+    <script type="text/javascript" id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+
   </head>
 
 <body>
@@ -52,6 +55,7 @@
             <a class="dropdown-item" href="{{ url_for('search', table='umich') }}">SPR-UMich</a>
             <a class="dropdown-item" href="{{ url_for('search', table='psu_corrosion_product_spr') }}">Corrosion Product SPR-PSU</a>
             <a class="dropdown-item" href="{{ url_for('search', table='psu_corrosion_product_rsw') }}">Corrosion Product RSW-PSU</a>
+            <a class="dropdown-item" href="{{ url_for('search', table='psu_elastic_properties') }}">Elastic Properties-PSU</a>
             <a class="dropdown-item" href="{{ url_for('phase') }}">Phase-PSU</a>
           </div>
         </li>
@@ -99,6 +103,13 @@
               <a class="nav-link" href="{{ url_for('search', table='psu_corrosion_product_rsw') }}">
                   <span data-feather="search"> </span>
                  Corrosion Product RSW-PSU
+              </a>
+            </li>
+
+            <li class="nav-item">
+              <a class="nav-link" href="{{ url_for('search', table='psu_elastic_properties') }}">
+                  <span data-feather="search"> </span>
+                 Elastic Properties-PSU
               </a>
             </li>
 
