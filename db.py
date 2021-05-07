@@ -139,6 +139,26 @@ class Database:
             print("Errors. Check columns from database and specificed columns.")
         return result, col_names_trans
 
+    def get_user_id(self, user_id):
+        query = f"""
+                    SELECT user_id
+                    FROM User
+                    WHERE user_id = '{user_id}'
+        """
+        self.cur.execute(query)
+        result = self.cur.fetchall()
+        return result[0]["user_id"]
+
+    def get_user_password(self, user_id):
+        query = f"""
+                    SELECT password
+                    FROM User
+                    WHERE user_id = '{user_id}'
+        """
+        self.cur.execute(query)
+        result = self.cur.fetchall()
+        return result[0]["password"]
+
 
 if __name__ == "__main__":
     # Test db connection
