@@ -20,7 +20,7 @@ def create_datatable(data: dict, col_name_trans: dict = None) -> dash_table.Data
         style_header={"backgroundColor": "rgb(230, 230, 230)", "fontWeight": "bold"},
         style_cell={
             # all three widths are needed
-            "minWidth": "10px",
+            "minWidth": "50px",
             "width": "240px",
             "maxWidth": "500px",
         },
